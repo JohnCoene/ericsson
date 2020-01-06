@@ -1,0 +1,64 @@
+---
+output: 
+  github_document:
+    html_preview: false
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+# errlang
+
+{errlang} attempts at integrating [Erlang](https://www.erlang.org/) with R.
+
+## Example
+
+Requires erlang installed.
+
+```{r}
+library(errlang)
+
+e <- Erl$new()
+
+e$eval("4 + 3.")
+```
+
+Create a `readme` module and compile it.
+
+```erlang
+%% readme.erl
+-module(readme).
+-export([fac/1]).
+
+fac(1) ->
+    1;
+fac(N) ->
+    N * fac(N - 1).
+```
+
+Then in R.
+
+```{r}
+e$compile("readme")
+e$eval("readme:fac(4).")
+```
+
+## Get it
+
+Install it from Github.
+
+``` r
+# install.packages("remotes")
+remotes::install_github("JohnCoene/errlang")
+```

@@ -2,3 +2,6 @@
 ^test\.R$
 ^test\.erl$
 ^test\.beam$
+^README\.Rmd$
+^readme\.erl$
+^readme\.beam$
