@@ -1,0 +1,17 @@
+Package: errlang
+Title: Use 'erlang'
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "John",
+           family = "Coene",
+           role = c("aut", "cre"),
+           email = "jcoenep@gmail.com")
+Description: Use 'erlang'.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    R6,
+    subprocess,
+    assertthat
+RoxygenNote: 7.0.2
