@@ -29,6 +29,7 @@ Erl <- R6::R6Class(
       assert_that(!missing(code))
       process_write(private$erl, paste(code, "\n"))
       res <- process_read(private$erl, PIPE_STDOUT, timeout = 0)
+      res <- res[-length(res)]
       if (wait){
         while (length(res) == 0){
           Sys.sleep(0.1)
@@ -51,10 +52,10 @@ Erl <- R6::R6Class(
     },
 #' @details Kills the session.
     finalize = function(){
-      self$kill()
+      self$halt()
     },
 #' @details Kills the session.
-    kill = function(){
+    halt = function(){
       process_kill(private$erl)
     },
 #' @details Print the session.

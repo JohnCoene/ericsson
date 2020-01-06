@@ -5,3 +5,4 @@
 ^README\.Rmd$
 ^readme\.erl$
 ^readme\.beam$
+^\.vscode$

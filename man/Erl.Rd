@@ -27,7 +27,7 @@ Erl$new()$eval("3 + 4.")
 \item \href{#method-eval}{\code{Erl$eval()}}
 \item \href{#method-compile}{\code{Erl$compile()}}
 \item \href{#method-finalize}{\code{Erl$finalize()}}
-\item \href{#method-kill}{\code{Erl$kill()}}
+\item \href{#method-halt}{\code{Erl$halt()}}
 \item \href{#method-print}{\code{Erl$print()}}
 \item \href{#method-clone}{\code{Erl$clone()}}
 }
@@ -120,10 +120,10 @@ Kills the session.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-kill"></a>}}
-\subsection{Method \code{kill()}}{
+\if{html}{\out{<a id="method-halt"></a>}}
+\subsection{Method \code{halt()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Erl$kill()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Erl$halt()}\if{html}{\out{</div>}}
 }
 
 \subsection{Details}{
