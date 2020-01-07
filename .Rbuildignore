@@ -6,3 +6,4 @@
 ^readme\.erl$
 ^readme\.beam$
 ^\.vscode$
+^\.travis\.yml$
