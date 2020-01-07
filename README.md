@@ -1,17 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) <!-- badges: end -->
 
-ericsson
-========
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
 
-{ericsson} attempts at integrating [Erlang](https://www.erlang.org/) with R.
+# ericsson
+
+{ericsson} attempts at integrating [Erlang](https://www.erlang.org/)
+with R.
 
 :warning: This is still under heavy development.
 
-Example
--------
+## Example
 
 Requires erlang installed.
 
@@ -50,11 +53,10 @@ Finally halt the session.
 
 ``` r
 e$halt()
-#> [1] TRUE
+#> ✔ Erlang session halted.
 ```
 
-Get it
-------
+## Get it
 
 Install it from Github.
 

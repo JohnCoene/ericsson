@@ -37,7 +37,16 @@ Erl <- R6::R6Class(
         }
         invisible(res[-length(res)])
       }
-      res[-length(res)]
+      res <- res[-length(res)]
+
+      # if error print return insivible
+      if(grepl("^\\*", res)){
+        res <- gsub("\\*", "", res)
+        cat(crayon::red(cli::symbol$cross), res, "\n")
+        return(invisible(res))
+      }
+
+      return(res)
     },
 #' @details Compile Erlang
 #' 
@@ -56,11 +65,16 @@ Erl <- R6::R6Class(
     },
 #' @details Kills the session.
     halt = function(){
-      process_kill(private$erl)
+      if(process_state(private$erl) == "running"){
+        process_kill(private$erl)
+        cli::cli_alert_success("Erlang session halted.")
+      } else {
+        cli::cli_alert_danger("Erlang session already halted.\n")
+      }
     },
 #' @details Print the session.
     print = function(){
-      cat("An erlang session.\n")
+      cli::cli_alert_info("An erlang session.\n")
     }
   ),
   private = list(

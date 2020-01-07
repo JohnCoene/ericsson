@@ -12,6 +12,8 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     R6,
+    cli,
+    crayon,
     subprocess,
     assertthat
 RoxygenNote: 7.0.2
