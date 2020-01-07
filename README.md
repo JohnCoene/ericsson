@@ -60,9 +60,32 @@ e$halt()
 
 ## Get it
 
-Install it from Github.
+Install the package from Github.
 
 ``` r
 # install.packages("remotes")
 remotes::install_github("JohnCoene/ericsson")
 ```
+
+Install [Erlang](https://www.erlang.org/).
+
+### Mac OS
+
+Use homebrew.
+
+``` bash
+brew install erlang
+```
+
+### Ubuntu
+
+With the Linux package manager.
+
+``` bash
+sudo apt-get install erlang
+```
+
+### Windows
+
+Get the executable from the [Erlang
+website](https://www.erlang.org/downloads).

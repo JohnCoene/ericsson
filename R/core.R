@@ -2,6 +2,8 @@
 #' 
 #' Interact with the erlang shell.
 #' 
+#' @importFrom dplyr enquo select
+#' @importFrom magrittr `%>%`
 #' @import subprocess
 #' @export
 Erl <- R6::R6Class(
@@ -40,13 +42,39 @@ Erl <- R6::R6Class(
       res <- res[-length(res)]
 
       # if error print return insivible
-      if(grepl("^\\*", res)){
+      if(grepl("^\\*", res)[1]){
         res <- gsub("\\*", "", res)
         cat(crayon::red(cli::symbol$cross), res, "\n")
         return(invisible(res))
       }
-
+      res <- purrr::map(res, trimws) %>% 
+        paste0(collapse = "")
       return(res)
+    },
+#' @details Create a variable
+#' 
+#' @param name Name of variable.
+#' @param value Value of variable, an object of class \code{erlang_object}.
+#' 
+#' @examples
+#' df <- data.frame(
+#'   key = letters[1:10],
+#'   value = runif(10)
+#' )
+#' 
+#' map <- as_map(df, key = key, value = value)
+#' 
+#' e <- Erl$new()
+#' e$assign("Vehicles", map)
+#' e$eval("maps::get(a, Vehicles).")
+#' e$eval("maps:update(b, 25, Vehicles).")
+#' @export
+    assign = function(name, value){
+      assert_that(!missing(name))
+      assert_that(is_erlang_object(value))
+
+      cmd <- paste0(name, " = ", value)
+      self$eval(cmd)
     },
 #' @details Compile Erlang
 #' 

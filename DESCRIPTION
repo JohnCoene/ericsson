@@ -13,7 +13,9 @@ LazyData: true
 Imports:
     R6,
     cli,
+    dplyr,
     crayon,
+    magrittr,
     subprocess,
     assertthat
 RoxygenNote: 7.0.2

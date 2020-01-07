@@ -15,6 +15,22 @@ Interact with the erlang shell.
 Erl$new()$eval("3 + 4.")
 
 ## ------------------------------------------------
+## Method `Erl$assign`
+## ------------------------------------------------
+
+df <- data.frame(
+  key = letters[1:10],
+  value = runif(10)
+)
+
+map <- as_map(df, key = key, value = value)
+
+e <- Erl$new()
+e$assign("Vehicles", map)
+e$eval("maps::get(a, Vehicles)")
+e$eval("maps:update(b, 25, Vehicles)")
+
+## ------------------------------------------------
 ## Method `Erl$compile`
 ## ------------------------------------------------
 
@@ -25,6 +41,7 @@ Erl$new()$eval("3 + 4.")
 \itemize{
 \item \href{#method-new}{\code{Erl$new()}}
 \item \href{#method-eval}{\code{Erl$eval()}}
+\item \href{#method-assign}{\code{Erl$assign()}}
 \item \href{#method-compile}{\code{Erl$compile()}}
 \item \href{#method-finalize}{\code{Erl$finalize()}}
 \item \href{#method-halt}{\code{Erl$halt()}}
@@ -74,6 +91,45 @@ Evaluate Erlang Code
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{Erl$new()$eval("3 + 4.")
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-assign"></a>}}
+\subsection{Method \code{assign()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Erl$assign(name, value)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Name of variable.}
+
+\item{\code{value}}{Value of variable, an object of class \code{erlang_object}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+Create a variable
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{df <- data.frame(
+  key = letters[1:10],
+  value = runif(10)
+)
+
+map <- as_map(df, key = key, value = value)
+
+e <- Erl$new()
+e$assign("Vehicles", map)
+e$eval("maps::get(a, Vehicles)")
+e$eval("maps:update(b, 25, Vehicles)")
 }
 \if{html}{\out{</div>}}
 
