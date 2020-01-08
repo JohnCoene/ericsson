@@ -15,16 +15,31 @@ erlang_object <- function(x, cl = NULL){
 
 #' @export
 print.erlang_object <- function(x, ...){
-  cli::cli_alert_info("An erlang object.")
+  cli::cli_alert_info("An erlang object")
 }
 
 #' @export
 print.erlang_map <- function(x, ...){
-  cli::cli_alert_info("An erlang map.")
-  
-  # print map
-  if(nchar(x) > 50)
-    cat(substr(x, 1, 50), crayon::blue("..."), "}.\n")
+  cli::cli_alert_info("An erlang map")
+  .print(x)
+}
+
+#' @export
+print.erlang_list <- function(x, ...){
+  cli::cli_alert_info("An erlang list")
+  .print(x)
+}
+
+#' @export
+print.erlang_tuple <- function(x, ...){
+  cli::cli_alert_info("An erlang tuple")
+  .print(x)
+}
+
+.print <- function(x){
+  max <- getOption("ERLANG_PRINT")
+  if(nchar(x) > max)
+    cat(substr(x, 1, max), crayon::blue("..."), "}\n")
   else
-    cat(x)
+    cat(x, "\n")
 }

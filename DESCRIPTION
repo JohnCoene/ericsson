@@ -16,6 +16,7 @@ Imports:
     dplyr,
     crayon,
     magrittr,
+    jsonlite,
     subprocess,
     assertthat
 RoxygenNote: 7.0.2

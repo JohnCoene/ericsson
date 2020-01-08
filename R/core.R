@@ -51,7 +51,7 @@ Erl <- R6::R6Class(
         paste0(collapse = "")
       return(res)
     },
-#' @details Create a variable
+#' @details Create a Variable
 #' 
 #' @param name Name of variable.
 #' @param value Value of variable, an object of class \code{erlang_object}.
@@ -64,17 +64,58 @@ Erl <- R6::R6Class(
 #' 
 #' map <- as_map(df, key = key, value = value)
 #' 
-#' e <- Erl$new()
-#' e$assign("Vehicles", map)
-#' e$eval("maps::get(a, Vehicles).")
+#' # create the map
+#' e <- Erl$new()$assign("Vehicles", map)
+#' 
+#' # manipulate map
+#' e$eval("maps:get(a, Vehicles).")
 #' e$eval("maps:update(b, 25, Vehicles).")
+#' e$halt()
 #' @export
     assign = function(name, value){
       assert_that(!missing(name))
       assert_that(is_erlang_object(value))
 
-      cmd <- paste0(name, " = ", value)
+      cmd <- paste0(name, " = ", value, ".")
       self$eval(cmd)
+      invisible(self)
+    },
+#' @details Create a Tuple
+#' 
+#' @param name Name of the variable.
+#' @param value Value to convert to a tuple.
+#' 
+#' @examples
+#' e <- Erl$
+#'  new()$
+#'  assign_tuple("Cars", cars)
+#' 
+#' e$eval("element(2, Cars).")
+#' e$halt()
+    assign_tuple = function(name, value){
+      assert_that(!missing(name), !missing(value))
+      value <- as_tuple(data)
+      self$assign(name, value)
+      invisible(self)
+    },
+#' @details Create a List
+#' 
+#' @param name Name of the variable.
+#' @param value Value to convert to a list.
+#' 
+#' @examples
+#' e <- Erl$
+#'  new()$
+#'  assign_list("V", cars)
+#' 
+#' e$eval("[H|T] = V.")
+#' e$eval("H.")
+#' e$halt()
+    assign_list = function(name, value){
+      assert_that(!missing(name), !missing(value))
+      value <- as_list(data)
+      self$assign(name, value)
+      invisible(self)
     },
 #' @details Compile Erlang
 #' 
@@ -85,7 +126,8 @@ Erl <- R6::R6Class(
     compile = function(name) {
       name <- gsub("\\.erl$", "", name)
       cmd <- paste0("c(", name, ").")
-      self$eval(cmd)
+      rez <- self$eval(cmd)
+      cat(crayon::green(cli::symbol$tick), rez, "\n")
     },
 #' @details Kills the session.
     finalize = function(){

@@ -25,10 +25,36 @@ df <- data.frame(
 
 map <- as_map(df, key = key, value = value)
 
-e <- Erl$new()
-e$assign("Vehicles", map)
-e$eval("maps::get(a, Vehicles)")
-e$eval("maps:update(b, 25, Vehicles)")
+# create the map
+e <- Erl$new()$assign("Vehicles", map)
+
+# manipulate map
+e$eval("maps:get(a, Vehicles).")
+e$eval("maps:update(b, 25, Vehicles).")
+e$halt()
+
+## ------------------------------------------------
+## Method `Erl$assign_tuple`
+## ------------------------------------------------
+
+e <- Erl$
+ new()$
+ assign_tuple("Cars", cars)
+
+e$eval("element(2, Cars).")
+e$halt()
+
+## ------------------------------------------------
+## Method `Erl$assign_list`
+## ------------------------------------------------
+
+e <- Erl$
+ new()$
+ assign_list("V", cars)
+
+e$eval("[H|T] = V.")
+e$eval("H.")
+e$halt()
 
 ## ------------------------------------------------
 ## Method `Erl$compile`
@@ -42,6 +68,8 @@ e$eval("maps:update(b, 25, Vehicles)")
 \item \href{#method-new}{\code{Erl$new()}}
 \item \href{#method-eval}{\code{Erl$eval()}}
 \item \href{#method-assign}{\code{Erl$assign()}}
+\item \href{#method-assign_tuple}{\code{Erl$assign_tuple()}}
+\item \href{#method-assign_list}{\code{Erl$assign_list()}}
 \item \href{#method-compile}{\code{Erl$compile()}}
 \item \href{#method-finalize}{\code{Erl$finalize()}}
 \item \href{#method-halt}{\code{Erl$halt()}}
@@ -114,7 +142,7 @@ Evaluate Erlang Code
 \if{html}{\out{</div>}}
 }
 \subsection{Details}{
-Create a variable
+Create a Variable
 }
 
 \subsection{Examples}{
@@ -126,10 +154,82 @@ Create a variable
 
 map <- as_map(df, key = key, value = value)
 
-e <- Erl$new()
-e$assign("Vehicles", map)
-e$eval("maps::get(a, Vehicles)")
-e$eval("maps:update(b, 25, Vehicles)")
+# create the map
+e <- Erl$new()$assign("Vehicles", map)
+
+# manipulate map
+e$eval("maps:get(a, Vehicles).")
+e$eval("maps:update(b, 25, Vehicles).")
+e$halt()
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-assign_tuple"></a>}}
+\subsection{Method \code{assign_tuple()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Erl$assign_tuple(name, value)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Name of the variable.}
+
+\item{\code{value}}{Value to convert to a tuple.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+Create a Tuple
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{e <- Erl$
+ new()$
+ assign_tuple("Cars", cars)
+
+e$eval("element(2, Cars).")
+e$halt()
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-assign_list"></a>}}
+\subsection{Method \code{assign_list()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Erl$assign_list(name, value)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Name of the variable.}
+
+\item{\code{value}}{Value to convert to a list.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+Create a List
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{e <- Erl$
+ new()$
+ assign_list("V", cars)
+
+e$eval("[H|T] = V.")
+e$eval("H.")
+e$halt()
 }
 \if{html}{\out{</div>}}
 
